@@ -1,0 +1,10 @@
+# Identidade e segredos — NUNCA commitar
+dados/
+dono/privada.json
+
+# Gerado — rebuild via: python3 dono/assinar_update.py && bash build_dist.sh
+dist/
+
+# Python
+__pycache__/
+*.pyc
