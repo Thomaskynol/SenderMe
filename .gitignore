@@ -5,6 +5,16 @@ dono/privada.json
 # Gerado — rebuild via: python3 dono/assinar_update.py && bash build_dist.sh
 dist/
 
+# Checkpoints/lanes fora da árvore (nunca commitar)
+SenderMe-checkpoints/
+
 # Python
 __pycache__/
 *.pyc
+
+# Logs e temporários do updater (runtime; nunca commitar)
+*.log
+logs/
+.upd-staging/
+.upd-backup/
+.upd-pendente.json

@@ -5,6 +5,9 @@
 Lê dono/privada.json (NUNCA distribuída), calcula sha256 dos arquivos do
 pacote e escreve update-manifest.json {manifest, sig} na raiz do projeto.
 O manifest entra na dist/ e é servido via P2P; a privada nunca sai daqui.
+
+A lista de arquivos e a versão vêm de senderme_app/meta.py (fonte única,
+mesma usada por start.sh/build_dist.sh/testes).
 """
 import hashlib
 import json
@@ -14,17 +17,17 @@ import sys
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, RAIZ)
 
-ARQUIVOS = ["senderme.py", "bootstrap.min.css", "start.sh", "README.md",
-            "docs/01-produto.md", "docs/02-arquitetura.md", "docs/03-progresso.md"]
+from senderme_app.meta import ARQUIVOS_UPDATE as ARQUIVOS
 
 
 def versao_do_codigo():
     import re
-    src = open(os.path.join(RAIZ, "senderme.py"), encoding="utf-8").read()
+    src = open(os.path.join(RAIZ, "senderme_app", "meta.py"),
+               encoding="utf-8").read()
     m = re.search(r'^VERSAO\s*=\s*os\.environ\.get\("SENDERME_VERSAO",\s*"([^"]+)"\)',
                   src, re.M)
     if not m:
-        raise SystemExit("VERSAO não encontrada em senderme.py")
+        raise SystemExit("VERSAO não encontrada em senderme_app/meta.py")
     return m.group(1)
 
 
